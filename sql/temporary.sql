@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 14, 2021 at 11:13 AM
+-- Generation Time: Apr 10, 2021 at 10:43 PM
 -- Server version: 5.7.33-0ubuntu0.18.04.1
 -- PHP Version: 8.0.3
 
@@ -18,8 +18,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `temporary`
+-- Database: `temporary_messaging_system`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `recipient_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `header` varchar(60) NOT NULL,
+  `message` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `recipient_id`, `sender_id`, `header`, `message`) VALUES
+(1, 1, 2, 'terve', 't6V4UWDOgunzFHPFgtzokA==');
 
 -- --------------------------------------------------------
 
@@ -38,11 +59,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'n00bsaiboth', '$2y$10$aBKlTz2sbk/Y8cbZzrK60OiB6xxvqNV3u4eXl3upJOguuI3A4/0Ra');
+(1, 'n00bsaiboth', '$2y$10$OcyVs2Sxh/HEJ8sBJWEksO5253A8dJv54LIUV3y15lXQXXU5oVZKK'),
+(2, 'roope', '$2y$10$OsVSuT8j3GmcPDxBhU3DROQcOkLGR/697703flVhQSa3aTWghAOL2');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -56,10 +84,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
