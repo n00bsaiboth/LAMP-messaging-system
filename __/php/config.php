@@ -199,6 +199,7 @@
 				// Quite not sure if this works, but try to make the $session_id variable to be integer.    
 	
 				$_SESSION["id"] = filter_var($row["id"], FILTER_VALIDATE_INT);
+				$_SESSION["username"] = filter_var($row["username"], FILTER_SANITIZE_STRING);
 	
 				header('location:index.php');
 			} else {
@@ -286,13 +287,29 @@
 		$stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
 		if($stmt->execute()) {
-			$row   = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		 	return $row;
+			while($row = $stmt->fetch()) {
+				echo "<p><a href=\"singlemessage.php?id={$row["id"]}\">" .  $row["header"] . "</a></p>";
+				
+			}
 		} else {
 
 		}
-
 	}
 
+	function getSingleMessage($dbh = null, $id = null) {
+		$sql = "SELECT * FROM `messages` WHERE `id` = :id";
+
+		$stmt = $dbh->prepare($sql);
+
+		$stmt->bindParam(":id", $id, PDO::PARAM_INT);	
+		
+		$stmt->execute();
+		
+		$count = $stmt->rowCount();
+		$row   = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($count == 1 && !empty($row)) {
+			return $row;
+		}
+	}
 ?>

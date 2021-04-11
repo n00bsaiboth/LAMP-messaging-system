@@ -12,11 +12,13 @@
     <?php
 
 
-      $articles = getNewMessages($dbh, $_SESSION["id"]);
+      // $articles = getNewMessages($dbh, $_SESSION["id"]);
 
-      print_r ($articles);
+      getNewMessages($dbh, $_SESSION["id"]);
+
+      // print_r($articles);
     ?>
-    <p>No new messages. </p>
+    
 </section>
 
 <section class="container" id="sendnewmessage">
