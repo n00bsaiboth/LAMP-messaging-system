@@ -23,26 +23,33 @@
         $message_id = filter_var($message_id, FILTER_VALIDATE_INT);
 
         $message_id = (int) $message_id;
+
+        if(isset($_SESSION["id"]) && !empty($_SESSION["id"])) {
+            $get_message = getSingleMessage($dbh, $message_id);
+
+            if($get_message["recipient_id"] == $_SESSION["id"]) {
+                $view_message = $get_message;
+            }
+        }
     }
 
-    $message = getSingleMessage($dbh, $message_id);
+    
 
     include("__/php/header.php");
+        
 ?>
 
-
     <section class="container" id="profile">
-        <h2>Profile</h2>
+        
 
         <?php 
-		    if(isset($message) && !empty($message)) {
-                echo "<p>ID: " . $message["id"] . "</p>";
-                echo "<p>Header: " . $message["header"] . "</p>";
-                echo "<p>Encrypted Message: " . $message["message"] . "</p>";
-                // openssl_decrypt($encrypted_string, "AES-128-ECB", $key)
-                echo "<p>Message in plain text: " . openssl_decrypt($message["message"], "AES-128-ECB", $_SESSION["username"]) . "</p>";
+		    if(isset($view_message) && !empty($view_message)) {
+                echo "<h2>" . $view_message["header"] . "</h2>";
+                echo "<p>ID: " . $view_message["id"] . "</p>";
+                echo "<p>Encrypted Message: " . $view_message["message"] . "</p>";
+                echo "<p>Message in plain text: " . openssl_decrypt($view_message["message"], "AES-128-ECB", $_SESSION["username"]) . "</p>";
             } else {
-                $_SESSION["error"] = "Unfortunately, we couldn't find the following profile that matches with the ID-number. Actually we think that there was no ID-number.";
+                $_SESSION["error"] = "Unfortunately, it looks like you have not logged in yet. You need to be logged in to view this message.";
 
                 header("Location: error.php");
             }
@@ -56,5 +63,6 @@
     </section>
 
 <?php
+
     include("__/php/footer.php");
 ?>
