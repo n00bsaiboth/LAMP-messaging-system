@@ -278,18 +278,20 @@
 	// get messages 
 
 	function getNewMessages($dbh = null, $id = null) {
-		
-		$sql = "SELECT * FROM messages";
+
+		$sql = "SELECT * FROM `messages` WHERE `recipient_id` = :id";
 
 		$stmt = $dbh->prepare($sql);
 
-		// $stmt->bindParam(":recipient_id", $id, PDO::PARAM_INT);
+		$stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
-		$stmt->execute();
+		if($stmt->execute()) {
+			$row   = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		$row   = $stmt->fetch(PDO::FETCH_ASSOC);
+		 	return $row;
+		} else {
 
-		return $row;
+		}
 
 	}
 

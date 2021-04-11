@@ -14,7 +14,7 @@
 
       $articles = getNewMessages($dbh, $_SESSION["id"]);
 
-       print_r ($articles["header"]);
+      print_r ($articles);
     ?>
     <p>No new messages. </p>
 </section>
