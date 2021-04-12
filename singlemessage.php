@@ -58,7 +58,7 @@
 
     <section class="container" id="">
     <?php
-        echo "<a href=\"" . htmlspecialchars("index.php") . "\">Back to frontpage</a>";
+        echo "<a href=\"" . htmlspecialchars("messages.php") . "\">Back to messages</a>";
     ?>
     </section>
 

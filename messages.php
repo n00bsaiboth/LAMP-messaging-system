@@ -20,7 +20,7 @@
       $id = (int) $id; 
     }
 
-    if(!isset($_SESSION["id"]) && empty($_SESSION["id"])) {
+    if(empty($_SESSION["id"])) {
       $_SESSION["error"] = "Not so fast, it looks like you have not logged in yet. You need to be logged in to send new message. ";
 
       header("Location: error.php");
@@ -30,17 +30,11 @@
 <section class="container" id="messages">
     <h2>Welcome to messages</h2>
     <?php
-
-
       if(isset($id) && !empty($id)) {
         getNewMessages($dbh, $id);
       } else {
         echo "<p>No new messages. </p>";
-      }
-
-      
-
-      
+      }    
     ?>
     
 </section>
