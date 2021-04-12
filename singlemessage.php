@@ -55,7 +55,19 @@
     </section>
 
     <section class="container" id="">
-        <h2>Reply to this message</h2>    
+        <h2>Reply to this message</h2> 
+        <form action=<?php echo htmlspecialchars("process_replymessage.php"); ?> method="post">
+            <input type="hidden" id="" name="recipient_id" value="<?php echo $view_message["recipient_id"]; ?>">
+            <input type="hidden" id="" name="sender_id" value="<?php echo $view_message["sender_id"]; ?>">
+            <input type="hidden" id="" name="header" value="<?php echo $view_message["header"]; ?>">
+
+            <div class="form-group">
+                <label for="reply">Reply with following content</label>
+                <textarea class="form-control" id="reply" name="reply" id="reply" rows="3"></textarea>  
+            </div>
+
+            <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Reply">
+        </form>   
     </section>      
 
     <section class="container" id="">

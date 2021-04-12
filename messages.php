@@ -52,8 +52,8 @@
       <input type="text" class="form-control" name="header" id="header">      
     </div>
     <div class="form-group">
-    <label for="message">Message</label>
-    <textarea class="form-control" id="message" name="message" id="message" rows="3"></textarea>  
+      <label for="message">Message</label>
+      <textarea class="form-control" id="message" name="message" id="message" rows="3"></textarea>  
     </div>
     <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Send">
   </form>

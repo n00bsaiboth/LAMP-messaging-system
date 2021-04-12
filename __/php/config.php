@@ -259,6 +259,24 @@
     	} 
 	}
 
+	function getUsernameByID($dbh = null, $id = null) {
+
+		$query = "SELECT * FROM `users` WHERE `id`=:id";
+
+		$stmt = $dbh->prepare($query);
+
+    	$stmt->bindParam('id', $id, PDO::PARAM_STR);
+
+    	$stmt->execute();
+
+    	$count = $stmt->rowCount();
+    	$row   = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    	if($count == 1 && !empty($row)) {
+        	return $row["username"];
+    	} 
+	}
+
 	// send message
 
 	function sendNewMessage($dbh = null, $recipient_id = null, $sender_id = null, $header = null, $message = null) {
