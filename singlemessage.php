@@ -39,9 +39,7 @@
         
 ?>
 
-    <section class="container" id="profile">
-        
-
+    <section class="container" id="message">
         <?php 
 		    if(isset($view_message) && !empty($view_message)) {
                 echo "<h2>" . $view_message["header"] . "</h2>";
@@ -55,6 +53,20 @@
             }
         ?>
     </section>
+
+    <section class="container" id="">
+        <h2>Reply to this message</h2>    
+    </section>      
+
+    <section class="container" id="">
+        <h2>Remove message</h2>
+
+        <form action=<?php echo htmlspecialchars("process_removemessage.php"); ?> method="post">
+            <input type="hidden" id="" name="id" value="<?php echo $view_message["id"]; ?>">
+
+            <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Remove">
+        </form>
+    </section>    
 
     <section class="container" id="">
     <?php

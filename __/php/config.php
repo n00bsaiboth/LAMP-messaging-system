@@ -296,6 +296,8 @@
 		}
 	}
 
+	// get single message
+
 	function getSingleMessage($dbh = null, $id = null) {
 		$sql = "SELECT * FROM `messages` WHERE `id` = :id";
 
@@ -311,5 +313,20 @@
 		if($count == 1 && !empty($row)) {
 			return $row;
 		}
+	}
+
+	// remove single message
+
+	function removeSingleMessage($dbh = null, $id = null) {
+
+		$sql = "DELETE FROM `messages` WHERE `id` = :id";
+
+		$stmt = $dbh->prepare($sql);
+	
+		$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+		if($stmt->execute()) {
+			header("location: messages.php");    
+		  }
 	}
 ?>
